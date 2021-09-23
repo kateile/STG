@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ui/reader.dart';
+import 'ui/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Reader(
-        initialPage: 90,
-      ),
+      home: const Home(),
     );
   }
 }

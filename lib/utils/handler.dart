@@ -60,9 +60,10 @@ List<Topic> handlePages() {
       title: title,
       index: index,
       page: int.tryParse(pageNumber) ?? 0,
+      isChapter: !index.contains('.'),
     );
 
-    list.add(top);
+    if (title.isNotEmpty) list.add(top);
   }
 
   return list;
