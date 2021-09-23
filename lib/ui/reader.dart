@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
+import 'package:stg/utils/handler.dart';
 
 class Reader extends StatefulWidget {
-  final int initialPage;
+  final Topic topic;
 
   const Reader({
     Key? key,
-    required this.initialPage,
+    required this.topic,
   }) : super(key: key);
 
   @override
@@ -21,11 +22,14 @@ class _ReaderState extends State<Reader> {
   void initState() {
     _selectedIndex = 0;
 
+    final page = widget.topic.page + 35; //IMPORTANT
+
     _pdfController = PdfController(
       document: PdfDocument.openAsset('assets/stg.pdf'),
-      initialPage: widget.initialPage,
+      initialPage: page,
       viewportFraction: 8.5,
     );
+
     super.initState();
   }
 
@@ -39,35 +43,13 @@ class _ReaderState extends State<Reader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('STG'),
-        centerTitle: true,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
+        title: Text(widget.topic.title),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {},
           )
         ],
-      ),
-      drawer: Drawer(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              Text('This is the Drawer'),
-            ],
-          ),
-        ),
       ),
       body: PdfView(
         documentLoader: const Center(child: CircularProgressIndicator()),
