@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stg/utils/handler.dart';
 
-import 'reader.dart';
+import 'list.dart';
+import 'search.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -32,45 +32,13 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: SearchTopicDelegate());
+            },
           )
         ],
       ),
-      body: _buildList(),
-    );
-  }
-
-  _buildList() {
-    final list = handlePages();
-
-    return ListView.builder(
-      itemCount: list.length,
-      itemBuilder: (BuildContext context, int index) {
-        final Topic t = list[index];
-
-        return Card(
-          child: ListTile(
-            title: Text(
-              t.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Text(t.index),
-            tileColor: t.isChapter ? Colors.blue.shade50 : null,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => Reader(
-                    topic: t,
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      },
+      body: const TopicList(),
     );
   }
 }
