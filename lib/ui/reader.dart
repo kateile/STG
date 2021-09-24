@@ -27,7 +27,7 @@ class _ReaderState extends State<Reader> {
     _pdfController = PdfController(
       document: PdfDocument.openAsset('assets/stg.pdf'),
       initialPage: page,
-      viewportFraction: 8.5,
+      viewportFraction: 4.0,
     );
 
     super.initState();
@@ -44,12 +44,12 @@ class _ReaderState extends State<Reader> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.topic.title),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {},
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.bookmark),
+        //     onPressed: () {},
+        //   )
+        // ],
       ),
       body: PdfView(
         documentLoader: const Center(child: CircularProgressIndicator()),
