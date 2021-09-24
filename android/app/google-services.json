@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831165460028",
+    "project_id": "stg-app-2021",
+    "storage_bucket": "stg-app-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831165460028:android:3c6b245277b03b83ce1d39",
+        "android_client_info": {
+          "package_name": "com.kateile.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831165460028-sn33spjd80en8qqmmp4ue8m1qs3cmov4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe40FkgyLsOhURyC3i9WlBE0usYDPBfS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831165460028-sn33spjd80en8qqmmp4ue8m1qs3cmov4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

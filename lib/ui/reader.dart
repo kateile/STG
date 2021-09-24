@@ -55,7 +55,7 @@ class _ReaderState extends State<Reader> {
         documentLoader: const Center(child: CircularProgressIndicator()),
         pageLoader: const Center(child: CircularProgressIndicator()),
         controller: _pdfController,
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
