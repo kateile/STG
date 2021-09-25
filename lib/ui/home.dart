@@ -49,6 +49,8 @@ class _HomeState extends State<Home> {
             ListTile(
               title: const Text('Join Telegram Group'),
               trailing: const Icon(Icons.link),
+              subtitle: const Text(
+                  'Interact with app developer and get access to quick updates here.'),
               onTap: () {
                 _openURL('https://t.me/STG_app');
               },
@@ -56,6 +58,8 @@ class _HomeState extends State<Home> {
             ListTile(
               title: const Text('Send Feedback'),
               trailing: const Icon(Icons.message),
+              subtitle:
+                  const Text('Report bugs and request new features here.'),
               onTap: () {
                 _openURL(
                     'mailto:s@kateile.com?subject=STG App Feedback&body=Hi \n');
@@ -81,7 +85,9 @@ class _HomeState extends State<Home> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'This app should be used for learning purposes only.',
+                'Ministry Of Health, Community Development, Gender, '
+                'Elderly and Children was not involved in development of this App. \n\n'
+                    'It is intended for learning purposes only.',
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,

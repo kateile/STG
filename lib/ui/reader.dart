@@ -22,7 +22,11 @@ class _ReaderState extends State<Reader> {
   void initState() {
     _selectedIndex = 0;
 
-    final page = widget.topic.page + 35; //IMPORTANT
+    int page = widget.topic.page + 35; //IMPORTANT
+
+    if (widget.topic.page > 417) {
+      page = page - 16;
+    }
 
     _pdfController = PdfController(
       document: PdfDocument.openAsset('assets/stg.pdf'),
