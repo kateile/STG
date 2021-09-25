@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
             ),
             const Divider(),
             ListTile(
-              title: const Text('Sylivanus Kateile'),
+              title: const Text('Sylvanus Kateile'),
               subtitle: const Text('App Developer'),
               trailing: const Icon(Icons.link),
               onTap: () {
