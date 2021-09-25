@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -58,20 +59,10 @@ class _HomeState extends State<Home> {
             ListTile(
               title: const Text('Send Feedback'),
               trailing: const Icon(Icons.message),
-              subtitle:
-                  const Text('Report bugs and request new features here.'),
+              subtitle: const Text('Report bugs and request  features here.'),
               onTap: () {
                 _openURL(
                     'mailto:s@kateile.com?subject=STG App Feedback&body=Hi \n');
-              },
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text('Sylvanus Kateile'),
-              subtitle: const Text('App Developer'),
-              trailing: const Icon(Icons.link),
-              onTap: () {
-                _openURL('https://kateile.com');
               },
             ),
             ListTile(
@@ -81,18 +72,55 @@ class _HomeState extends State<Home> {
                 showLicensePage(context: context);
               },
             ),
+            const Divider(),
             const Expanded(child: SizedBox()),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(
+                      text: 'This is App is developed by ',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: 'Sylvanus Kateile, ',
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          _openURL('https://kateile.com');
+                        },
+                      children: const [
+                        TextSpan(
+                          text:
+                              'an Intern Pharmacist as well as Software Developer. '
+                              '\nI own no copyright of the written contents.',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              //fontStyle: FontStyle.italic,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const Divider(),
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                 'Ministry Of Health, Community Development, Gender, '
                 'Elderly and Children was not involved in development of this App. \n\n'
-                    'It is intended for learning purposes only.',
+                'It is intended for learning purposes only.',
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
               ),
             ),
           ],
