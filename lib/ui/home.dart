@@ -43,6 +43,7 @@ class _HomeState extends State<Home> {
       ),
       drawer: Drawer(
         child: ListView(
+          padding: EdgeInsets.zero,
           shrinkWrap: true,
           children: <Widget>[
             DrawerHeader(
@@ -98,7 +99,6 @@ class _HomeState extends State<Home> {
               },
             ),
             const Divider(),
-            const Expanded(child: SizedBox()),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RichText(
