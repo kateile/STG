@@ -41,8 +41,8 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView(
+          shrinkWrap: true,
           children: <Widget>[
             DrawerHeader(
               child: Image.asset('assets/logo.png'),
@@ -51,7 +51,8 @@ class _HomeState extends State<Home> {
               title: const Text('Join Telegram Group'),
               trailing: const Icon(Icons.link),
               subtitle: const Text(
-                  'Interact with app developer and get access to quick updates here.'),
+                'Interact with app developer and get access to quick updates here.',
+              ),
               onTap: () {
                 _openURL('https://t.me/STG_app');
               },
@@ -59,17 +60,28 @@ class _HomeState extends State<Home> {
             ListTile(
               title: const Text('Send Feedback'),
               trailing: const Icon(Icons.message),
-              subtitle: const Text('Report bugs and request  features here.'),
+              subtitle:
+                  const Text('Report bugs and request new features here.'),
               onTap: () {
                 _openURL(
-                    'mailto:s@kateile.com?subject=STG App Feedback&body=Hi \n');
+                  'mailto:s@kateile.com?subject=STG App Feedback&body=Hi \n',
+                );
               },
             ),
             ListTile(
               title: const Text('Open Source Licenses'),
+              subtitle: const Text("See app's own cells and organs."),
               trailing: const Icon(Icons.code),
               onTap: () {
                 showLicensePage(context: context);
+              },
+            ),
+            ListTile(
+              title: const Text('Rate this app'),
+              subtitle: const Text("I would love to know my score."),
+              trailing: const Icon(Icons.star),
+              onTap: () {
+                _openURL("https://play.google.com/store/apps/details?id=com.kateile.stg");
               },
             ),
             const Divider(),
@@ -84,10 +96,10 @@ class _HomeState extends State<Home> {
                       style: TextStyle(color: Colors.black),
                     ),
                     TextSpan(
-                      text: 'Sylvanus Kateile, ',
+                      text: 'Sylvanus Kateile',
                       style: const TextStyle(
                         color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w900,
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
@@ -96,8 +108,8 @@ class _HomeState extends State<Home> {
                       children: const [
                         TextSpan(
                           text:
-                              'an Intern Pharmacist as well as Software Developer. '
-                              '\nI own no copyright of the written contents.',
+                              ', an Intern Pharmacist as well as Software Developer. '
+                              '\nI own no copyright of STG contents.',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
                             //fontStyle: FontStyle.italic,
