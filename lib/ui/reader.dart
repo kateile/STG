@@ -31,7 +31,6 @@ class _ReaderState extends State<Reader> {
     _pdfController = PdfController(
       document: PdfDocument.openAsset('assets/stg.pdf'),
       initialPage: page,
-      viewportFraction: 4.0,
     );
 
     super.initState();
@@ -50,8 +49,10 @@ class _ReaderState extends State<Reader> {
         title: Text(widget.topic.title),
         // actions: [
         //   IconButton(
-        //     icon: const Icon(Icons.bookmark),
-        //     onPressed: () {},
+        //     icon: const Icon(Icons.info),
+        //     onPressed: () {
+        //       _showMyDialog(context);
+        //     },
         //   )
         // ],
       ),
@@ -93,6 +94,42 @@ class _ReaderState extends State<Reader> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Disclaimer'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                  'This is app uses cropped pages of the original STG pdf to '
+                  'avoid unnecessary white spaces and improve user experience. '
+                  'In doing so some of pages may have been cropped inaccurately '
+                  'resulting to some contents being missing. \n'
+                  'So please always refer to original STG book or PDF. '
+                  'This should be used for educational purposes only. \n\n'
+                  'I would love everything here to be as accurate as possible '
+                  'so if you find something missing please send me a screenshot '
+                  'via stg@kateile.com or telegram group. \n\n',
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

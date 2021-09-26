@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
                 text: TextSpan(
                   children: [
                     const TextSpan(
-                      text: 'This is App is developed by ',
+                      text: 'This app is developed by ',
                       style: TextStyle(color: Colors.black),
                     ),
                     TextSpan(
@@ -99,9 +99,10 @@ class _HomeState extends State<Home> {
                               'an Intern Pharmacist as well as Software Developer. '
                               '\nI own no copyright of the written contents.',
                           style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              //fontStyle: FontStyle.italic,
-                              color: Colors.black),
+                            fontWeight: FontWeight.normal,
+                            //fontStyle: FontStyle.italic,
+                            color: Colors.black,
+                          ),
                         ),
                       ],
                     ),
@@ -115,7 +116,7 @@ class _HomeState extends State<Home> {
               child: Text(
                 'Ministry Of Health, Community Development, Gender, '
                 'Elderly and Children was not involved in development of this App. \n\n'
-                'It is intended for learning purposes only.',
+                'It is intended for educational purposes only.',
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
