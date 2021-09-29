@@ -1,6 +1,9 @@
 # stg
+- add different renderer
 - progress with percent
 - favourites
+- auto check for updates
+- most viewed
 
 https://pdf.online/crop-pdf
 
