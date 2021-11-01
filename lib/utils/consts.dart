@@ -1,2 +1,4 @@
+///
+/// Don't change these keys
 const favoritesBoxKey = 'favourites';
-const recentsBox = 'recents';
+const recentsBoxKey = 'recents';

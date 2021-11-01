@@ -5,8 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stg/utils/handler.dart';
+import 'package:stg/utils/utils.dart';
 
 class Render extends StatefulWidget {
   final Topic topic;
@@ -22,10 +24,13 @@ class Render extends StatefulWidget {
 
 class _RenderState extends State<Render> {
   String pathPDF = "";
+  late Box<String> favoritesBox;
 
   @override
   void initState() {
     super.initState();
+    favoritesBox = Hive.box(favoritesBoxKey);
+
     fromAsset('assets/stg.pdf', 'stg.pdf').then((f) {
       setState(() {
         pathPDF = f.path;
@@ -51,26 +56,56 @@ class _RenderState extends State<Render> {
     return completer.future;
   }
 
+  void onFavoritePress(String index) {
+    if (favoritesBox.containsKey(index)) {
+      favoritesBox.delete(index);
+      return;
+    }
+    favoritesBox.put(index, index);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.topic.title),
-      ),
-      body: Center(
-        child: Builder(
-          builder: (BuildContext context) {
-            if (pathPDF.isNotEmpty) {
-              return PDFScreen(
-                path: pathPDF,
-                currentPage: widget.topic.page,
-              );
-            }
+    return ValueListenableBuilder(
+      valueListenable: favoritesBox.listenable(),
+      builder: (context, Box<String> box, _) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.topic.title),
+            actions: [
+              IconButton(
+                icon: Builder(
+                  builder: (context) {
+                    if (box.containsKey(widget.topic.index)) {
+                      return const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      );
+                    }
 
-            return const CircularProgressIndicator.adaptive();
-          },
-        ),
-      ),
+                    return const Icon(Icons.favorite_outline);
+                  },
+                ),
+                onPressed: () => onFavoritePress(widget.topic.index),
+              ),
+            ],
+          ),
+          body: Center(
+            child: Builder(
+              builder: (BuildContext context) {
+                if (pathPDF.isNotEmpty) {
+                  return PDFScreen(
+                    path: pathPDF,
+                    currentPage: widget.topic.page,
+                  );
+                }
+
+                return const CircularProgressIndicator.adaptive();
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

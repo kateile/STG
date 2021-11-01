@@ -60,7 +60,7 @@ class TopicListState extends State<TopicList> {
           if (list.isEmpty) {
             return const Center(
               child: Text(
-                'You have no bookmarks!',
+                'You have no Favourites!',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -88,13 +88,13 @@ class TopicListState extends State<TopicList> {
                   child: Builder(
                     builder: (context) {
                       if (box.containsKey(t.index)) {
-                        return Icon(
-                          Icons.bookmark,
-                          color: Theme.of(context).primaryColor,
+                        return const Icon(
+                          Icons.favorite,
+                          color:  Colors.red,
                         );
                       }
 
-                      return const Icon(Icons.bookmark_outline);
+                      return const Icon(Icons.favorite_outline);
                     },
                   ),
                   onTap: () => onFavoritePress(t.index),
