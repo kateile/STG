@@ -7,16 +7,16 @@ import 'package:stg/utils/utils.dart';
 
 import 'render.dart';
 
+enum TabState { all, favourites, recents }
+
 class TopicList extends StatefulWidget {
   final String query;
-  final bool favouritesOnly;
-  final bool recentsOnly;
+  final TabState tabState;
 
   const TopicList({
     Key? key,
     this.query = '',
-    this.favouritesOnly = false,
-    this.recentsOnly = false,
+    this.tabState = TabState.all,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class TopicList extends StatefulWidget {
 }
 
 class TopicListState extends State<TopicList> {
-  late Box<String> favoritesBox;
+  late Box<int> favoritesBox;
   late Box<int> recentsBox;
 
   @override
@@ -41,7 +41,7 @@ class TopicListState extends State<TopicList> {
       favoritesBox.delete(index);
       return;
     }
-    favoritesBox.put(index, index);
+    favoritesBox.put(index, DateTime.now().millisecondsSinceEpoch);
   }
 
   @override
@@ -56,43 +56,42 @@ class TopicListState extends State<TopicList> {
       builder: (context, Box<int> rBox, _) {
         return ValueListenableBuilder(
           valueListenable: favoritesBox.listenable(),
-          builder: (context, Box<String> fBox, _) {
+          builder: (context, Box<int> fBox, _) {
             var list = all;
 
-            if (widget.favouritesOnly) {
-              list = all.where((e) => fBox.containsKey(e.index)).toList();
+            if (widget.tabState != TabState.all) {
+              ///Here we will have different arrangements based on timestamp
+              ///which topic action was done
 
-              if (list.isEmpty) {
-                return const Center(
-                  child: Text(
-                    'You have no Favourites!',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                );
-              }
-            } else if (widget.recentsOnly) {
+              late Map<dynamic, int> map;
+              late String msg;
+
               /// Here we will hold saved items
-              final List<Topic> recents = [];
-              final map = rBox.toMap();
+              final List<Topic> filtered = [];
+
+              if (widget.tabState == TabState.favourites) {
+                map = fBox.toMap();
+                msg = 'You have no favourites yet!';
+              } else if (widget.tabState == TabState.recents) {
+                map = rBox.toMap();
+                msg = 'You have not opened any Topic yet!';
+              }
 
               map.forEach((key, value) {
                 final item = all.firstWhere((e) => e.index == key);
 
                 final topic = item.copyWith(timestamp: value);
-                recents.add(topic);
+                filtered.add(topic);
               });
 
-              list = recents;
+              list = filtered;
               list.sort((a, b) => b.timestamp!.compareTo(a.timestamp!));
 
               if (list.isEmpty) {
-                return const Center(
+                return Center(
                   child: Text(
-                    'You have not opened any Topic yet!',
-                    style: TextStyle(
+                    msg,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),

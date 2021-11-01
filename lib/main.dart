@@ -23,7 +23,7 @@ void main() async {
   /// Changing box types may result in error in the runtime
   /// If you want to update these make sure you have renamed your keys or do migration
   await Future.wait([
-    Hive.openBox<String>(favoritesBoxKey),
+    Hive.openBox<int>(favoritesBoxKey),
     Hive.openBox<int>(recentsBoxKey),
   ]);
 

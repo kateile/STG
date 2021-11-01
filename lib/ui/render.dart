@@ -24,7 +24,7 @@ class Render extends StatefulWidget {
 
 class _RenderState extends State<Render> {
   String pathPDF = "";
-  late Box<String> favoritesBox;
+  late Box<int> favoritesBox;
   late Box<int> recentsBox;
 
   @override
@@ -66,14 +66,14 @@ class _RenderState extends State<Render> {
       favoritesBox.delete(index);
       return;
     }
-    favoritesBox.put(index, index);
+    favoritesBox.put(index, DateTime.now().millisecondsSinceEpoch);
   }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: favoritesBox.listenable(),
-      builder: (context, Box<String> box, _) {
+      builder: (context, Box<int> box, _) {
         return Scaffold(
           appBar: AppBar(
             title: Text(widget.topic.title),
