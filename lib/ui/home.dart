@@ -183,7 +183,7 @@ class _HomeState extends State<Home> {
           children: [
             TopicList(),
             TopicList(),
-            TopicList(),
+            TopicList(favouritesOnly: true),
           ],
         ),
       ),

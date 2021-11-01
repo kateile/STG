@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -8,8 +9,15 @@ import 'reader.dart';
 
 class TopicList extends StatefulWidget {
   final String query;
+  final bool favouritesOnly;
+  final bool recentsOnly;
 
-  const TopicList({Key? key, this.query = ''}) : super(key: key);
+  const TopicList({
+    Key? key,
+    this.query = '',
+    this.favouritesOnly = false,
+    this.recentsOnly = false,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -36,52 +44,75 @@ class TopicListState extends State<TopicList> {
 
   @override
   Widget build(BuildContext context) {
-    final list = handlePages()
+    final all = handlePages()
         .where(
             (e) => e.title.toLowerCase().contains(widget.query.toLowerCase()))
         .toList();
 
-    return ListView.builder(
-      itemCount: list.length,
-      itemBuilder: (BuildContext context, int index) {
-        final Topic t = list[index];
+    return ValueListenableBuilder(
+      valueListenable: favoritesBox.listenable(),
+      builder: (context, Box<String> box, _) {
+        var list = all;
 
-        return Card(
-          child: ListTile(
-            title: Text(
-              t.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+        if (widget.favouritesOnly) {
+          list = all.where((e) => box.containsKey(e.index)).toList();
+
+          if (list.isEmpty) {
+            return const Center(
+              child: Text(
+                'You have no bookmarks!',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
-            ),
-            subtitle: Text(t.index),
-            trailing: InkWell(
-              child: ValueListenableBuilder(
-                valueListenable: favoritesBox.listenable(),
-                builder: (context, Box<String> box, _) {
-                  if (box.containsKey(t.index)) {
-                    return Icon(
-                      Icons.bookmark,
-                      color: Theme.of(context).primaryColor,
-                    );
-                  }
-                  return const Icon(Icons.bookmark_outline);
-                },
-              ),
-              onTap: () => onFavoritePress(t.index),
-            ),
-            tileColor: t.isChapter ? Colors.blue.shade50 : null,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => Reader(
-                    topic: t,
+            );
+          }
+        }
+
+        return ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (BuildContext context, int index) {
+            final Topic t = list[index];
+
+            return Card(
+              child: ListTile(
+                title: Text(
+                  t.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              );
-            },
-          ),
+                subtitle: Text(t.index),
+                trailing: InkWell(
+                  child: Builder(
+                    builder: (context) {
+                      if (box.containsKey(t.index)) {
+                        return Icon(
+                          Icons.bookmark,
+                          color: Theme.of(context).primaryColor,
+                        );
+                      }
+
+                      return const Icon(Icons.bookmark_outline);
+                    },
+                  ),
+                  onTap: () => onFavoritePress(t.index),
+                ),
+                tileColor: t.isChapter ? Colors.blue.shade50 : null,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => Reader(
+                        topic: t,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
         );
       },
     );
