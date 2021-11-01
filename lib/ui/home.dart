@@ -180,7 +180,7 @@ class _HomeState extends State<Home> {
         drawerEnableOpenDragGesture: false,
         body: const TabBarView(
           children: [
-            TopicList(),
+            TopicList(recentsOnly: true),
             TopicList(),
             TopicList(favouritesOnly: true),
           ],

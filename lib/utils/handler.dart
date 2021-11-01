@@ -4,14 +4,30 @@ class Topic {
   final String title;
   final String index;
   final bool isChapter;
-  final int page;
+  int page;
+
+  /// This will we be used for recent/favourite feature
+  final int? timestamp;
 
   Topic({
     required this.title,
     required this.index,
     this.isChapter = false,
     required this.page,
+    this.timestamp,
   });
+
+  Topic copyWith({
+    required int timestamp,
+  }) {
+    return Topic(
+      title: title,
+      index: index,
+      isChapter: isChapter,
+      page: page,
+      timestamp: this.timestamp ?? timestamp,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -19,6 +35,7 @@ class Topic {
       "title": title,
       "page": page,
       "isChapter": isChapter,
+      "time": timestamp,
     };
   }
 

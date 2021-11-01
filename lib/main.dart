@@ -9,18 +9,23 @@ import 'utils/consts.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //Hive
-  await Hive.initFlutter();
-
-  await Hive.openBox<String>(favoritesBoxKey);
-
-  //In windows does not work
   try {
-    await Firebase.initializeApp();
+    await Future.wait([
+      Hive.initFlutter(),
+      Firebase.initializeApp(), //In windows does not work
+    ]);
 
     // Pass all uncaught errors from the framework to Crashlytics.
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   } catch (_) {}
+
+  /// Initializing Hive boxes
+  /// Changing box types may result in error in the runtime
+  /// If you want to update these make sure you have renamed your keys or do migration
+  await Future.wait([
+    Hive.openBox<String>(favoritesBoxKey),
+    Hive.openBox<int>(recentsBoxKey),
+  ]);
 
   runApp(const MyApp());
 }

@@ -25,11 +25,16 @@ class Render extends StatefulWidget {
 class _RenderState extends State<Render> {
   String pathPDF = "";
   late Box<String> favoritesBox;
+  late Box<int> recentsBox;
 
   @override
   void initState() {
     super.initState();
+
     favoritesBox = Hive.box(favoritesBoxKey);
+    recentsBox = Hive.box(recentsBoxKey);
+
+    recentsBox.put(widget.topic.index, DateTime.now().millisecondsSinceEpoch);
 
     fromAsset('assets/stg.pdf', 'stg.pdf').then((f) {
       setState(() {
