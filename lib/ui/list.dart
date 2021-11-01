@@ -28,6 +28,22 @@ class TopicList extends StatelessWidget {
               ),
             ),
             subtitle: Text(t.index),
+            trailing: Builder(
+              builder: (context) {
+                return InkWell(
+                  child: Builder(builder: (context) {
+                    if (t.isChapter) {
+                      return Icon(
+                        Icons.bookmark,
+                        color: Theme.of(context).primaryColor,
+                      );
+                    }
+                    return const Icon(Icons.bookmark_outline);
+                  }),
+                  onTap: () {},
+                );
+              },
+            ),
             tileColor: t.isChapter ? Colors.blue.shade50 : null,
             onTap: () {
               Navigator.push(
