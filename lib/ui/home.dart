@@ -97,14 +97,6 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
-                title: const Text('Open Source Licenses'),
-                subtitle: const Text("See app's own cells and organs."),
-                trailing: const Icon(Icons.code),
-                onTap: () {
-                  showLicensePage(context: context);
-                },
-              ),
-              ListTile(
                 title: const Text('Rate this app'),
                 subtitle: const Text("I would love to know my score."),
                 trailing: const Icon(Icons.star),
@@ -174,6 +166,13 @@ class _HomeState extends State<Home> {
                   ),
                   textAlign: TextAlign.left,
                 ),
+              ),
+              const Divider(),
+              TextButton(
+                child: const Text('Open Source Licenses'),
+                onPressed: () {
+                  showLicensePage(context: context);
+                },
               ),
             ],
           ),

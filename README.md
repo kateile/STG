@@ -1,9 +1,12 @@
 # stg
+
 - add different renderer
 - progress with percent
-- favourites
 - auto check for updates
 - most viewed
+- add tabs All, Recents, Favorites
+- search with recent searches
+- questions and answers and bonus points
 
 https://pdf.online/crop-pdf
 

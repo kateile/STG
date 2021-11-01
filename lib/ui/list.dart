@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stg/utils/handler.dart';
 import 'package:stg/utils/utils.dart';
 
-import 'reader.dart';
+import 'render.dart';
 
 class TopicList extends StatefulWidget {
   final String query;
@@ -104,7 +104,7 @@ class TopicListState extends State<TopicList> {
                   Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => Reader(
+                      builder: (BuildContext context) => Render(
                         topic: t,
                       ),
                     ),
