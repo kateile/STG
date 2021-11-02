@@ -132,17 +132,17 @@ class PDFScreen extends StatefulWidget {
 class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   final Completer<PDFViewController> _controller =
       Completer<PDFViewController>();
-  late int? pages;
+  late int? _currentPage;
 
   bool isReady = false;
   String errorMessage = '';
 
   @override
   initState() {
-    pages = widget.currentPage + 34;
+    _currentPage = widget.currentPage + 34;
 
     if (widget.currentPage > 417) {
-      pages = pages! - 16;
+      _currentPage = _currentPage! - 16;
     }
 
     super.initState();
@@ -160,13 +160,13 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             autoSpacing: false,
             pageFling: true,
             pageSnap: true,
-            defaultPage: pages!,
+            defaultPage: _currentPage!,
             fitPolicy: FitPolicy.HEIGHT,
             preventLinkNavigation: false,
             // if set to true the link is handled in flutter
-            onRender: (_pages) {
+            onRender: (_page) {
               setState(() {
-                pages = _pages;
+                _currentPage = _page;
                 isReady = true;
               });
             },
@@ -185,7 +185,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             },
             onPageChanged: (int? page, int? total) {
               setState(() {
-                pages = page;
+                _currentPage = page;
               });
             },
           ),
@@ -200,36 +200,37 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                 )
         ],
       ),
-      // bottomNavigationBar: FutureBuilder<PDFViewController>(
-      //   future: _controller.future,
-      //   builder: (context, k) {
-      //     return BottomNavigationBar(
-      //       showSelectedLabels: false,
-      //       showUnselectedLabels: false,
-      //       onTap: (i) {
-      //         late int dd;
-      //
-      //         if (i == 0) {
-      //           dd = pages! - 1;
-      //         } else if (i == 1) {
-      //           dd = pages! + 1;
-      //         }
-      //
-      //         k.data?.setPage(dd);
-      //       },
-      //       items: const [
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.navigate_before),
-      //           label: "Previous Page",
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.navigate_next),
-      //           label: "Next Page",
-      //         ),
-      //       ],
-      //     );
-      //   },
-      // ),
+      bottomNavigationBar: FutureBuilder<PDFViewController>(
+        future: _controller.future,
+        builder: (context, k) {
+          return BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            onTap: (i) {
+              late int dd;
+
+              k.data?.getCurrentPage().then((value) {
+                if (i == 0) {
+                  dd = value! - 1;
+                } else if (i == 1) {
+                  dd = value! + 1;
+                }
+                k.data?.setPage(dd);
+              });
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.navigate_before),
+                label: "Previous Page",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.navigate_next),
+                label: "Next Page",
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
