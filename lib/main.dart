@@ -3,7 +3,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'ui/home.dart';
+import 'app.dart';
 import 'utils/consts.dart';
 
 void main() async {
@@ -27,21 +27,5 @@ void main() async {
     Hive.openBox<int>(recentsBoxKey),
   ]);
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'STG',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Home(),
-    );
-  }
+  runApp(const App());
 }
