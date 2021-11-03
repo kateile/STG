@@ -25,6 +25,7 @@ class SearchTopicDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     return TopicList(
       query: query,
+      tabState: TabState.search,
     );
   }
 
@@ -32,6 +33,7 @@ class SearchTopicDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     return TopicList(
       query: query,
+      tabState: TabState.search,
     );
   }
 

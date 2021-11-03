@@ -5,9 +5,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stg/utils/handler.dart';
 import 'package:stg/utils/utils.dart';
 
+import 'ad.dart';
 import 'render.dart';
 
-enum TabState { all, favourites, recents }
+enum TabState { all, favourites, recents, search }
 
 class TopicList extends StatefulWidget {
   final String query;
@@ -59,7 +60,8 @@ class TopicListState extends State<TopicList> {
           builder: (context, Box<int> fBox, _) {
             var list = all;
 
-            if (widget.tabState != TabState.all) {
+            if (widget.tabState == TabState.recents ||
+                widget.tabState == TabState.favourites) {
               ///Here we will have different arrangements based on timestamp
               ///which topic action was done
 
@@ -100,7 +102,7 @@ class TopicListState extends State<TopicList> {
               }
             }
 
-            return ListView.builder(
+            return ListView.separated(
               itemCount: list.length,
               itemBuilder: (BuildContext context, int index) {
                 final Topic t = list[index];
@@ -141,6 +143,17 @@ class TopicListState extends State<TopicList> {
                       );
                     },
                   ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                if ((index != 0 && index % 5 == 0) ||
+                    (widget.tabState == TabState.search && index == 0)) {
+                  //return const Ad();
+                }
+
+                return const SizedBox(
+                  height: 0,
+                  width: 0,
                 );
               },
             );
