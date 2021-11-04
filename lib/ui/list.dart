@@ -148,7 +148,7 @@ class TopicListState extends State<TopicList> {
               separatorBuilder: (context, index) {
                 if ((index != 0 && index % 5 == 0) ||
                     (widget.tabState == TabState.search && index == 0)) {
-                  //return const Ad();
+                  return const AdTile();
                 }
 
                 return const SizedBox(

@@ -26,6 +26,8 @@ class AdTileState extends State<AdTile> {
       request: const AdRequest(),
       listener: const BannerAdListener(),
     );
+
+    _bannerAd.load();
   }
 
   @override
@@ -38,7 +40,7 @@ class AdTileState extends State<AdTile> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: AdWidget(ad: _bannerAd..load()),
+      child: AdWidget(ad: _bannerAd),
       width: _bannerAd.size.width.toDouble(),
       height: _bannerAd.size.height.toDouble(),
     );
