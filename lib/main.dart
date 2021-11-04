@@ -19,8 +19,8 @@ void main() async {
 
     // Pass all uncaught errors from the framework to Crashlytics.
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  } catch (e) {
-    print(e.toString());
+  } catch (_) {
+
   }
 
   /// Initializing Hive boxes

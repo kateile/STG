@@ -17,11 +17,11 @@ class AppState extends State<App> {
     InAppUpdate.checkForUpdate().then((info) {
       if (info.updateAvailability == UpdateAvailability.updateAvailable) {
         InAppUpdate.performImmediateUpdate().then((_) {}).catchError((e) {
-          print('performImmediateUpdate error: ${e.toString()}');
+          //print('performImmediateUpdate error: ${e.toString()}');
         });
       }
     }).catchError((e) {
-      print('checkForUpdate error: ${e.toString()}');
+      //print('checkForUpdate error: ${e.toString()}');
     });
   }
 
