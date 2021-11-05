@@ -158,7 +158,7 @@ class _HomeState extends State<Home> {
                             TextSpan(
                               text:
                                   ', an Intern Pharmacist as well as Software Developer. '
-                                  '\nI own no copyright of STG contents.',
+                                  '\nI own no copyright of STG contents and logo.',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 //fontStyle: FontStyle.italic,
