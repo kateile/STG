@@ -157,8 +157,7 @@ class _HomeState extends State<Home> {
                           children: const [
                             TextSpan(
                               text:
-                                  ', an Intern Pharmacist as well as Software Developer. '
-                                  '\nI own no copyright of STG contents and logo.',
+                                  ', an Intern Pharmacist as well as Software Developer. ',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 //fontStyle: FontStyle.italic,
@@ -171,20 +170,20 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                const Divider(),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Ministry Of Health, Community Development, Gender, '
-                    'Elderly and Children was not involved in development of this App. \n\n'
-                    'It is intended for educational purposes only.',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
+                // const Divider(),
+                // const Padding(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Text(
+                //     'Ministry Of Health, Community Development, Gender, '
+                //     'Elderly and Children was not involved in development of this App. \n\n'
+                //     'It is intended for educational purposes only.',
+                //     style: TextStyle(
+                //       color: Colors.red,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //     textAlign: TextAlign.left,
+                //   ),
+                // ),
                 const Divider(),
                 TextButton(
                   child: const Text('Open Source Licenses'),
