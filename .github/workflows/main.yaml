@@ -24,7 +24,7 @@ jobs:
         run: echo "${{ secrets.KEYSTORE_JKS }}" | base64 --decode > android/app/keystore.jks
 
       - name: Decode android/key.properties
-        run: echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > android/key.propertie
+        run: echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > android/key.properties
 
       - run: flutter pub get
       - run: flutter build appbundle --obfuscate --split-debug-info=./build/app/outputs/symbols
