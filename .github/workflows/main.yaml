@@ -32,7 +32,7 @@ jobs:
 
       - uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: com.kateile.stg
           releaseFiles: build/app/outputs/bundle/release/*.aab
           track: ${{ github.ref_name }}
