@@ -94,6 +94,18 @@ class _HomeState extends State<Home> {
                   child: Image.asset('assets/logo.png'),
                 ),
                 ListTile(
+                  title: const Text('Upgrade to STG Pro'),
+                  subtitle: const Text(
+                      "STG Pro is easier, powerful and has more features than this."),
+                  trailing: const Icon(Icons.upgrade),
+                  tileColor: Colors.blue.shade50,
+                  onTap: () {
+                    _openURL(
+                        "https://play.google.com/store/apps/details?id=com.kateile.stg.plus");
+                  },
+                ),
+                const Divider(),
+                ListTile(
                   title: const Text('Join Telegram Group'),
                   trailing: const Icon(Icons.link),
                   subtitle: const Text(
@@ -157,7 +169,7 @@ class _HomeState extends State<Home> {
                           children: const [
                             TextSpan(
                               text:
-                                  ', an Intern Pharmacist as well as Software Developer. ',
+                                  ', a Pharmacist and self-taught Software Developer. ',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 //fontStyle: FontStyle.italic,
@@ -170,20 +182,20 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                // const Divider(),
-                // const Padding(
-                //   padding: EdgeInsets.all(8.0),
-                //   child: Text(
-                //     'Ministry Of Health, Community Development, Gender, '
-                //     'Elderly and Children was not involved in development of this App. \n\n'
-                //     'It is intended for educational purposes only.',
-                //     style: TextStyle(
-                //       color: Colors.red,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //     textAlign: TextAlign.left,
-                //   ),
-                // ),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Ministry Of Health, Community Development, Gender, '
+                    'Elderly and Children was not involved in development of this App. \n\n'
+                    'It is intended for educational purposes only.',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
                 const Divider(),
                 TextButton(
                   child: const Text('Open Source Licenses'),
