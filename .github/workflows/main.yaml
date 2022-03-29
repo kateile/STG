@@ -38,4 +38,4 @@ jobs:
           track: ${{ github.ref_name }}
           inAppUpdatePriority: 2
           whatsNewDirectory: whatsnew
-          #mappingFile: build/app/outputs/symbols/mapping.txt
+          mappingFile: build/app/outputs/mapping/release/mapping.txt
