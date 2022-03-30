@@ -2,10 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:stg/utils/utils.dart';
 
 class Render extends StatefulWidget {
@@ -21,7 +20,6 @@ class Render extends StatefulWidget {
 }
 
 class _RenderState extends State<Render> {
-  String pathPDF = "";
   late Box<int> favoritesBox;
   late Box<int> recentsBox;
 
@@ -33,30 +31,6 @@ class _RenderState extends State<Render> {
     recentsBox = Hive.box(recentsBoxKey);
 
     recentsBox.put(widget.topic.index, DateTime.now().millisecondsSinceEpoch);
-
-    fromAsset('assets/stg.pdf', 'stg.pdf').then((f) {
-      setState(() {
-        pathPDF = f.path;
-      });
-    });
-  }
-
-  Future<File> fromAsset(String asset, String filename) async {
-    // To open from assets, you can copy them to the app storage folder, and the access them "locally"
-    Completer<File> completer = Completer();
-
-    try {
-      var dir = await getApplicationDocumentsDirectory();
-      File file = File("${dir.path}/$filename");
-      var data = await rootBundle.load(asset);
-      var bytes = data.buffer.asUint8List();
-      await file.writeAsBytes(bytes, flush: true);
-      completer.complete(file);
-    } catch (e) {
-      throw Exception('Error parsing asset file!');
-    }
-
-    return completer.future;
   }
 
   void onFavoritePress(String index) {
@@ -96,14 +70,12 @@ class _RenderState extends State<Render> {
           body: Center(
             child: Builder(
               builder: (BuildContext context) {
-                if (pathPDF.isNotEmpty) {
-                  return PDFScreen(
-                    path: pathPDF,
-                    currentPage: widget.topic.page,
-                  );
-                }
+                final file = Provider.of<File>(context);
 
-                return const CircularProgressIndicator.adaptive();
+                return PDFScreen(
+                  path: file.path,
+                  currentPage: widget.topic.page,
+                );
               },
             ),
           ),

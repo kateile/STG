@@ -1,12 +1,16 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'app.dart';
-import 'utils/consts.dart';
+import 'utils/utils.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +36,16 @@ void main() async {
     Hive.openBox<int>(recentsBoxKey),
   ]);
 
+  //loading file just once
+  final file = await loadPDF('assets/stg.pdf', 'stg.pdf');
+
   //Removing screen
   FlutterNativeSplash.remove();
 
-  runApp(const App());
+  runApp(
+    Provider<File>(
+      create: (_) => file,
+      child: const App(),
+    ),
+  );
 }
