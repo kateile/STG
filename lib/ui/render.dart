@@ -174,28 +174,42 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         future: _controller.future,
         builder: (context, k) {
           return BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+            //showSelectedLabels: false,
+            //showUnselectedLabels: false,
             onTap: (i) {
               late int dd;
 
               k.data?.getCurrentPage().then((value) {
-                if (i == 0) {
-                  dd = value! - 1;
-                } else if (i == 1) {
-                  dd = value! + 1;
+                if (i == 1) {
+                  openSTGPro();
+                } else {
+                  if (i == 0) {
+                    dd = value! - 1;
+                  } else if (i == 2) {
+                    dd = value! + 1;
+                  }
+                  k.data?.setPage(dd);
                 }
-                k.data?.setPage(dd);
               });
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.navigate_before),
-                label: "Previous Page",
+                icon: Icon(
+                  Icons.navigate_before,
+                ),
+                label: "Previous",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.navigate_next),
-                label: "Next Page",
+                icon: Icon(
+                  Icons.upgrade,
+                ),
+                label: "Upgrade",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.navigate_next,
+                ),
+                label: "Next",
               ),
             ],
           );
