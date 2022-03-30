@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -25,9 +24,7 @@ class _HomeState extends State<Home> {
     super.initState();
 
     _bannerAd = BannerAd(
-      adUnitId: kReleaseMode
-          ? 'ca-app-pub-7392676806201946/4453747801'
-          : BannerAd.testAdUnitId,
+      adUnitId: 'ca-app-pub-7392676806201946/4453747801',
       size: AdSize.mediumRectangle,
       request: const AdRequest(),
       listener: const BannerAdListener(),
