@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     );
 
     return WillPopScope(
-      onWillPop: showExitPopup,
+      onWillPop: () => showExitPopup(context),
       child: DefaultTabController(
         length: 3,
         initialIndex: 1,
@@ -216,7 +216,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Future<bool> showExitPopup() async {
+  Future<bool> showExitPopup(BuildContext context) async {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
