@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.9+9
+version: 1.0.9+19
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -39,7 +39,10 @@ dependencies:
   firebase_crashlytics: ^2.5.3
   url_launcher: ^6.0.12
   share_plus: ^4.0.3
-  flutter_pdfview: ^1.2.1
+  flutter_pdfview:
+    git:
+      url: git@github.com:kateile/flutter_pdfview.git
+      ref: master
   path_provider: ^2.0.5
   hive: ^2.1.0
   hive_flutter: ^1.1.0

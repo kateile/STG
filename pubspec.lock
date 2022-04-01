@@ -177,9 +177,11 @@ packages:
   flutter_pdfview:
     dependency: "direct main"
     description:
-      name: flutter_pdfview
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: "1478a5bd3c4727ce3886c2061e3990e578699fd7"
+      url: "git@github.com:kateile/flutter_pdfview.git"
+    source: git
     version: "1.2.2"
   flutter_test:
     dependency: "direct dev"
