@@ -176,8 +176,8 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         future: _controller.future,
         builder: (context, k) {
           return BottomNavigationBar(
-            //showSelectedLabels: false,
-            //showUnselectedLabels: false,
+            unselectedItemColor: Theme.of(context).primaryColorDark,
+            selectedItemColor: Theme.of(context).primaryColorDark,
             onTap: (i) {
               late int dd;
 
