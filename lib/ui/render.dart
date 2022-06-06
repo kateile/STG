@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:stg/ui/render_cubit.dart';
 import 'package:stg/utils/utils.dart';
 
 class Render extends StatefulWidget {
@@ -68,14 +68,16 @@ class _RenderState extends State<Render> {
             ],
           ),
           body: Center(
-            child: Builder(
-              builder: (BuildContext context) {
-                final file = Provider.of<File>(context);
+            child: BlocBuilder<RenderCubit, RenderResult>(
+              builder: (BuildContext context, state) {
+                if (state.state == ResultState.success) {
+                  return PDFScreen(
+                    path: state.file?.path,
+                    currentPage: widget.topic.page,
+                  );
+                }
 
-                return PDFScreen(
-                  path: file.path,
-                  currentPage: widget.topic.page,
-                );
+                return const CircularProgressIndicator();
               },
             ),
           ),
