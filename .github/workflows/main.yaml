@@ -4,6 +4,7 @@ on:
       - production
       - beta
       - alpha
+      - internal
 name: "Build & Release"
 jobs:
   build:
@@ -19,7 +20,9 @@ jobs:
           java-version: '11'
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.5.3'
+          flutter-version: '2.10.0'
+          cache: true
+          cache-key: flutter2
 
       - name: Decode android/app/keystore.jks
         run: echo "${{ secrets.KEYSTORE_JKS }}" | base64 --decode > android/app/keystore.jks

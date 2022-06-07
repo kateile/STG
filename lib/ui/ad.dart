@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -19,9 +18,7 @@ class AdTileState extends State<AdTile> {
     super.initState();
 
     _bannerAd = BannerAd(
-      adUnitId: kReleaseMode
-          ? 'ca-app-pub-7392676806201946/8313510889'
-          : BannerAd.testAdUnitId,
+      adUnitId: 'ca-app-pub-7392676806201946/8313510889',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),

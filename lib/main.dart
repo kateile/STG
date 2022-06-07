@@ -1,14 +1,21 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
-import 'utils/consts.dart';
+import 'ui/render_cubit.dart';
+import 'utils/utils.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   MobileAds.instance.initialize();
 
   try {
@@ -19,9 +26,7 @@ void main() async {
 
     // Pass all uncaught errors from the framework to Crashlytics.
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  } catch (_) {
-
-  }
+  } catch (_) {}
 
   /// Initializing Hive boxes
   /// Changing box types may result in error in the runtime
@@ -31,5 +36,15 @@ void main() async {
     Hive.openBox<int>(recentsBoxKey),
   ]);
 
-  runApp(const App());
+  //Removing screen
+  FlutterNativeSplash.remove();
+
+  runApp(
+    BlocProvider(
+      child: const App(),
+      create: (context) {
+        return RenderCubit()..read();
+      },
+    ),
+  );
 }

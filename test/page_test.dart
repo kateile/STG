@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:stg/utils/handler.dart';
 
@@ -6,7 +7,9 @@ void main() {
     final list = handlePages();
 
     for (var element in list) {
-      print(element.toString());
+      if (kDebugMode) {
+        print(element.toString());
+      }
     }
 
     expect(list.length, list.length);
