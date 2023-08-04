@@ -19,7 +19,7 @@ jobs:
           java-version: '11'
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.10.0'
+          flutter-version: '3.10.6'
 
       - name: Decode android/app/keystore.jks
         run: echo "${{ secrets.KEYSTORE_JKS }}" | base64 --decode > android/app/keystore.jks
@@ -38,4 +38,4 @@ jobs:
           track: ${{ github.ref_name }}
           inAppUpdatePriority: 2
           whatsNewDirectory: whatsnew
-          #mappingFile: build/app/outputs/symbols/mapping.txt
+          mappingFile: build/app/outputs/mapping/release/mapping.txt
