@@ -24,7 +24,9 @@ class _HomeState extends State<Home> {
     super.initState();
 
     _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-7392676806201946/4453747801',
+      adUnitId: kReleaseMode
+          ? 'ca-app-pub-7392676806201946/4453747801'
+          : 'ca-app-pub-3940256099942544/6300978111',
       size: AdSize.mediumRectangle,
       request: const AdRequest(),
       listener: const BannerAdListener(),
@@ -164,6 +166,7 @@ class _HomeState extends State<Home> {
                             TextSpan(
                               text:
                                   ', a Pharmacist and self-taught Software Developer. ',
+                                  ', a Pharmacist and Software Developer. ',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 //fontStyle: FontStyle.italic,
@@ -223,9 +226,9 @@ class _HomeState extends State<Home> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  child: AdWidget(ad: _bannerAd),
                   width: _bannerAd.size.width.toDouble(),
                   height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
                 ),
                 const Text('Are you sure you want to exit?'),
               ],
