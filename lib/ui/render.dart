@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:stg/utils/handler.dart';
 import 'package:stg/utils/utils.dart';
 
 class Render extends StatefulWidget {
@@ -19,7 +17,7 @@ class Render extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _RenderState createState() => _RenderState();
+  State<Render> createState() => _RenderState();
 }
 
 class _RenderState extends State<Render> {
@@ -126,7 +124,7 @@ class PDFScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PDFScreenState createState() => _PDFScreenState();
+  State<PDFScreen> createState() => _PDFScreenState();
 }
 
 class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
@@ -164,9 +162,9 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             fitPolicy: FitPolicy.HEIGHT,
             preventLinkNavigation: false,
             // if set to true the link is handled in flutter
-            onRender: (_page) {
+            onRender: (page) {
               setState(() {
-                _currentPage = _page;
+                _currentPage = page;
                 isReady = true;
               });
             },
