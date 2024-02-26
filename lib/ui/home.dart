@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../utils/url.dart';
 import 'list.dart';
 import 'search.dart';
 
@@ -13,7 +14,7 @@ class Home extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
@@ -98,7 +99,8 @@ class _HomeState extends State<Home> {
                       "STG Pro is easier, powerful and has more features than this."),
                   trailing: const Icon(Icons.upgrade),
                   tileColor: Colors.blue.shade50,
-                  onTap: openSTGPro,
+                  onTap: () => _openURL(
+                      "https://play.google.com/store/apps/details?id=com.kateile.stg.plus"),
                 ),
                 const Divider(),
                 ListTile(
@@ -108,7 +110,7 @@ class _HomeState extends State<Home> {
                     'Interact with app developer and get access to quick updates here.',
                   ),
                   onTap: () {
-                    openURL('https://t.me/STG_app');
+                    _openURL('https://t.me/STG_app');
                   },
                 ),
                 ListTile(
@@ -117,7 +119,7 @@ class _HomeState extends State<Home> {
                   subtitle:
                       const Text('Report bugs and request new features here.'),
                   onTap: () {
-                    openURL(
+                    _openURL(
                       'mailto:s@kateile.com?subject=STG App Feedback&body=Hi \n',
                     );
                   },
@@ -127,7 +129,7 @@ class _HomeState extends State<Home> {
                   subtitle: const Text("I would love to know my score."),
                   trailing: const Icon(Icons.star),
                   onTap: () {
-                    openURL(
+                    _openURL(
                         "https://play.google.com/store/apps/details?id=com.kateile.stg");
                   },
                 ),
@@ -160,13 +162,11 @@ class _HomeState extends State<Home> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              openURL('https://kateile.com');
+                              _openURL('https://kateile.com');
                             },
                           children: const [
                             TextSpan(
-                              text:
-                                  ', a Pharmacist and self-taught Software Developer. ',
-                                  ', a Pharmacist and Software Developer. ',
+                              text: ', a Pharmacist and Software Developer. ',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 //fontStyle: FontStyle.italic,
@@ -177,20 +177,6 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                  ),
-                ),
-                const Divider(),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Ministry Of Health, Community Development, Gender, '
-                    'Elderly and Children was not involved in development of this App. \n\n'
-                    'It is intended for educational purposes only.',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.left,
                   ),
                 ),
                 const Divider(),
@@ -246,5 +232,10 @@ class _HomeState extends State<Home> {
           ),
         ) ??
         false; //if showDialogue had returned null, then return false
+  }
+
+  void _openURL(String url) async {
+    final u = Uri.parse(url);
+    await canLaunchUrl(u) ? await launchUrl(u) : throw 'Could not launch $url';
   }
 }

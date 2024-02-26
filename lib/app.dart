@@ -37,6 +37,7 @@ class AppState extends State<App> {
       title: 'STG',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
       home: const Home(),
