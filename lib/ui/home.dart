@@ -170,20 +170,6 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                // const Divider(),
-                // const Padding(
-                //   padding: EdgeInsets.all(8.0),
-                //   child: Text(
-                //     'Ministry Of Health, Community Development, Gender, '
-                //     'Elderly and Children was not involved in development of this App. \n\n'
-                //     'It is intended for educational purposes only.',
-                //     style: TextStyle(
-                //       color: Colors.red,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //     textAlign: TextAlign.left,
-                //   ),
-                // ),
                 const Divider(),
                 TextButton(
                   child: const Text('Open Source Licenses'),
@@ -240,6 +226,7 @@ class _HomeState extends State<Home> {
   }
 
   void _openURL(String url) async {
-    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+    final u = Uri.parse(url);
+    await canLaunchUrl(u) ? await launchUrl(u) : throw 'Could not launch $url';
   }
 }
