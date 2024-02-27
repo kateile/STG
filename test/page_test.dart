@@ -7,8 +7,8 @@ void main() {
     final list = handlePages();
 
     for (var element in list) {
-      if (kDebugMode) {
-        print(element.toString());
+        if (kDebugMode) {
+          print(element.toString());
       }
     }
 

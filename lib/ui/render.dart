@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:stg/ui/render_cubit.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:stg/utils/utils.dart';
 
 class Render extends StatefulWidget {
@@ -16,10 +17,11 @@ class Render extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _RenderState createState() => _RenderState();
+  State<Render> createState() => _RenderState();
 }
 
 class _RenderState extends State<Render> {
+  String pathPDF = "";
   late Box<int> favoritesBox;
   late Box<int> recentsBox;
 
@@ -31,6 +33,30 @@ class _RenderState extends State<Render> {
     recentsBox = Hive.box(recentsBoxKey);
 
     recentsBox.put(widget.topic.index, DateTime.now().millisecondsSinceEpoch);
+
+    fromAsset('assets/stg.pdf', 'stg.pdf').then((f) {
+      setState(() {
+        pathPDF = f.path;
+      });
+    });
+  }
+
+  Future<File> fromAsset(String asset, String filename) async {
+    // To open from assets, you can copy them to the app storage folder, and the access them "locally"
+    Completer<File> completer = Completer();
+
+    try {
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/$filename");
+      var data = await rootBundle.load(asset);
+      var bytes = data.buffer.asUint8List();
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+
+    return completer.future;
   }
 
   void onFavoritePress(String index) {
@@ -68,16 +94,16 @@ class _RenderState extends State<Render> {
             ],
           ),
           body: Center(
-            child: BlocBuilder<RenderCubit, RenderResult>(
-              builder: (BuildContext context, state) {
-                if (state.state == ResultState.success) {
+            child: Builder(
+              builder: (BuildContext context) {
+                if (pathPDF.isNotEmpty) {
                   return PDFScreen(
-                    path: state.file?.path,
+                    path: pathPDF,
                     currentPage: widget.topic.page,
                   );
                 }
 
-                return const CircularProgressIndicator();
+                return const CircularProgressIndicator.adaptive();
               },
             ),
           ),
@@ -98,7 +124,7 @@ class PDFScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PDFScreenState createState() => _PDFScreenState();
+  State<PDFScreen> createState() => _PDFScreenState();
 }
 
 class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
@@ -136,9 +162,9 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             fitPolicy: FitPolicy.HEIGHT,
             preventLinkNavigation: false,
             // if set to true the link is handled in flutter
-            onRender: (_page) {
+            onRender: (page) {
               setState(() {
-                _currentPage = _page;
+                _currentPage = page;
                 isReady = true;
               });
             },
@@ -176,42 +202,28 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         future: _controller.future,
         builder: (context, k) {
           return BottomNavigationBar(
-            unselectedItemColor: Theme.of(context).primaryColorDark,
-            selectedItemColor: Theme.of(context).primaryColorDark,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
             onTap: (i) {
               late int dd;
 
               k.data?.getCurrentPage().then((value) {
-                if (i == 1) {
-                  openSTGPro();
-                } else {
-                  if (i == 0) {
-                    dd = value! - 1;
-                  } else if (i == 2) {
-                    dd = value! + 1;
-                  }
-                  k.data?.setPage(dd);
+                if (i == 0) {
+                  dd = value! - 1;
+                } else if (i == 1) {
+                  dd = value! + 1;
                 }
+                k.data?.setPage(dd);
               });
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.navigate_before,
-                ),
-                label: "Previous",
+                icon: Icon(Icons.navigate_before),
+                label: "Previous Page",
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.upgrade,
-                ),
-                label: "Upgrade",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.navigate_next,
-                ),
-                label: "Next",
+                icon: Icon(Icons.navigate_next),
+                label: "Next Page",
               ),
             ],
           );
