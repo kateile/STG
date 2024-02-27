@@ -37,6 +37,5 @@ void main() async {
   //Removing screen
   FlutterNativeSplash.remove();
 
-  runApp(const App(),
-  );
+  runApp(const App());
 }

@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
     );
 
     return WillPopScope(
-      onWillPop: showExitPopup,
+      onWillPop: () => showExitPopup(context),
       child: DefaultTabController(
         length: 3,
         initialIndex: 1,
@@ -93,6 +93,16 @@ class _HomeState extends State<Home> {
                 DrawerHeader(
                   child: Image.asset('assets/logo.png'),
                 ),
+                ListTile(
+                  title: const Text('Upgrade to STG Pro'),
+                  subtitle: const Text(
+                      "STG Pro is easier, powerful and has more features than this."),
+                  trailing: const Icon(Icons.upgrade),
+                  tileColor: Colors.blue.shade50,
+                  onTap: () => _openURL(
+                      "https://play.google.com/store/apps/details?id=com.kateile.stg.plus"),
+                ),
+                const Divider(),
                 ListTile(
                   title: const Text('Join Telegram Group'),
                   trailing: const Icon(Icons.link),
@@ -156,8 +166,7 @@ class _HomeState extends State<Home> {
                             },
                           children: const [
                             TextSpan(
-                              text:
-                                  ', a Pharmacist and Software Developer. ',
+                              text: ', a Pharmacist and Software Developer. ',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 //fontStyle: FontStyle.italic,
@@ -193,7 +202,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Future<bool> showExitPopup() async {
+  Future<bool> showExitPopup(BuildContext context) async {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(

@@ -28,14 +28,15 @@ jobs:
         run: echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > android/key.properties
 
       - run: flutter pub get
-      - run: flutter build appbundle --build-number=${{ github.run_number }} --build-name=2022.02.${{ github.run_number }} --obfuscate --split-debug-info=./build/app/outputs/symbols
+      - run: flutter build appbundle --build-number=${{ github.run_number }} --build-name=2024.02.${{ github.run_number }} --obfuscate --split-debug-info=./build/app/outputs/symbols
 
-      - uses: r0adkll/upload-google-play@v1.0.15
+      - uses: r0adkll/upload-google-play@v1.1.3
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: com.kateile.stg
           releaseFiles: build/app/outputs/bundle/release/*.aab
           track: ${{ github.ref_name }}
           inAppUpdatePriority: 2
+          changesNotSentForReview: false
           whatsNewDirectory: whatsnew
           mappingFile: build/app/outputs/mapping/release/mapping.txt

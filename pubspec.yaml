@@ -45,6 +45,7 @@ dependencies:
   hive_flutter: ^1.1.0
   in_app_update: ^4.1.4
   google_mobile_ads: ^4.0.0
+  flutter_native_splash: ^2.3.1 # flutter pub run flutter_native_splash:create
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +57,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.2
-  flutter_native_splash: ^2.3.1 # flutter pub run flutter_native_splash:create
   flutter_launcher_icons: ^0.13.1
   rflutter_alert: ^2.0.4
 
