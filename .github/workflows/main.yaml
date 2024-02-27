@@ -4,6 +4,7 @@ on:
       - production
       - beta
       - alpha
+      - internal
 name: "Build & Release"
 jobs:
   build:
