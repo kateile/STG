@@ -5,6 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../utils/link.dart';
 import 'list.dart';
 import 'search.dart';
 
@@ -99,7 +100,7 @@ class _HomeState extends State<Home> {
                       "STG Pro is easier, powerful and has more features than this."),
                   trailing: const Icon(Icons.upgrade),
                   tileColor: Colors.blue.shade50,
-                  onTap: () => _openURL(
+                  onTap: () => openLink(
                       "https://play.google.com/store/apps/details?id=com.kateile.stg.plus"),
                 ),
                 const Divider(),
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> {
                     'Interact with app developer and get access to quick updates here.',
                   ),
                   onTap: () {
-                    _openURL('https://t.me/STG_app');
+                    openLink('https://t.me/STG_app');
                   },
                 ),
                 ListTile(
@@ -119,9 +120,7 @@ class _HomeState extends State<Home> {
                   subtitle:
                       const Text('Report bugs and request new features here.'),
                   onTap: () {
-                    _openURL(
-                      'mailto:s@kateile.com?subject=STG App Feedback&body=Hi \n',
-                    );
+                    openLink('https://t.me/STG_app');
                   },
                 ),
                 ListTile(
@@ -129,7 +128,7 @@ class _HomeState extends State<Home> {
                   subtitle: const Text("I would love to know my score."),
                   trailing: const Icon(Icons.star),
                   onTap: () {
-                    _openURL(
+                    openLink(
                         "https://play.google.com/store/apps/details?id=com.kateile.stg");
                   },
                 ),
@@ -162,7 +161,7 @@ class _HomeState extends State<Home> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              _openURL('https://kateile.com');
+                              openLink('https://kateile.com');
                             },
                           children: const [
                             TextSpan(
@@ -232,10 +231,5 @@ class _HomeState extends State<Home> {
           ),
         ) ??
         false; //if showDialogue had returned null, then return false
-  }
-
-  void _openURL(String url) async {
-    final u = Uri.parse(url);
-    await canLaunchUrl(u) ? await launchUrl(u) : throw 'Could not launch $url';
   }
 }
