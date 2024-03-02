@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/link.dart';
 import 'list.dart';
@@ -112,6 +111,17 @@ class _HomeState extends State<Home> {
                   ),
                   onTap: () {
                     openLink('https://t.me/STG_app');
+                  },
+                ),
+                ListTile(
+                  title: const Text('Join WhatsApp Channel'),
+                  trailing: const Icon(Icons.add_link),
+                  subtitle: const Text(
+                    'For quick updates consider subscribe.',
+                  ),
+                  onTap: () {
+                    openLink(
+                        'https://whatsapp.com/channel/0029VaLJ1PFHgZWW8xFHxd1q');
                   },
                 ),
                 ListTile(
