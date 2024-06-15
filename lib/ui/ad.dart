@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdTile extends StatefulWidget {
-  const AdTile({Key? key}) : super(key: key);
+  const AdTile({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
+
+  final String id;
 
   @override
   State<StatefulWidget> createState() {
@@ -20,7 +25,7 @@ class AdTileState extends State<AdTile> {
 
     _bannerAd = BannerAd(
       adUnitId: kReleaseMode
-          ? 'ca-app-pub-7392676806201946/8313510889'
+          ? widget.id
           : 'ca-app-pub-3940256099942544/6300978111',
       size: AdSize.banner,
       request: const AdRequest(),
