@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.stg">
+    package="com.kateile.stg">
 
     <queries>
         <!-- If your app opens https URLs -->

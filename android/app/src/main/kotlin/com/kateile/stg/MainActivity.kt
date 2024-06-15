@@ -1,4 +1,4 @@
-package com.example.stg
+package com.kateile.stg
 
 import io.flutter.embedding.android.FlutterActivity
 

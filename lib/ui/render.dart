@@ -8,6 +8,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stg/utils/utils.dart';
 
+import 'ad.dart';
+
 class Render extends StatefulWidget {
   final Topic topic;
 
@@ -93,19 +95,26 @@ class _RenderState extends State<Render> {
               ),
             ],
           ),
-          body: Center(
-            child: Builder(
-              builder: (BuildContext context) {
-                if (pathPDF.isNotEmpty) {
-                  return PDFScreen(
-                    path: pathPDF,
-                    currentPage: widget.topic.page,
-                  );
-                }
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const AdTile(id: renderAdId),
+              const Divider(),
+              Builder(
+                builder: (BuildContext context) {
+                  if (pathPDF.isNotEmpty) {
+                    return Expanded(
+                      child: PDFScreen(
+                        path: pathPDF,
+                        currentPage: widget.topic.page,
+                      ),
+                    );
+                  }
 
-                return const CircularProgressIndicator.adaptive();
-              },
-            ),
+                  return const LinearProgressIndicator();
+                },
+              ),
+            ],
           ),
         );
       },
@@ -190,7 +199,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
           errorMessage.isEmpty
               ? !isReady
                   ? const Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator.adaptive(),
                     )
                   : Container()
               : Center(
