@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:stg/ui/ad.dart';
 
+import '../utils/consts.dart';
 import '../utils/link.dart';
 import 'list.dart';
 import 'search.dart';
@@ -187,6 +189,15 @@ class _HomeState extends State<Home> {
             TopicList(),
             TopicList(tabState: TabState.favourites),
           ],
+        ),
+        bottomNavigationBar: const Padding(
+          padding: EdgeInsets.only(
+            bottom: 24.0,
+            top: 16.0,
+          ),
+          child: AdTile(
+            id: homeBottomAdId,
+          ),
         ),
       ),
     );

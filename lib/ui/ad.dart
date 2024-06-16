@@ -24,9 +24,8 @@ class AdTileState extends State<AdTile> {
     super.initState();
 
     _bannerAd = BannerAd(
-      adUnitId: kReleaseMode
-          ? widget.id
-          : 'ca-app-pub-3940256099942544/6300978111',
+      adUnitId:
+          kReleaseMode ? widget.id : 'ca-app-pub-3940256099942544/6300978111',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
