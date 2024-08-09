@@ -190,15 +190,6 @@ class _HomeState extends State<Home> {
             TopicList(tabState: TabState.favourites),
           ],
         ),
-        bottomNavigationBar: const Padding(
-          padding: EdgeInsets.only(
-            bottom: 24.0,
-            top: 16.0,
-          ),
-          child: AdTile(
-            id: homeBottomAdId,
-          ),
-        ),
       ),
     );
   }
