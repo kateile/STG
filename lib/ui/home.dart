@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:stg/ui/ad.dart';
 
-import '../utils/consts.dart';
 import '../utils/link.dart';
 import 'list.dart';
 import 'search.dart';
@@ -123,7 +121,7 @@ class _HomeState extends State<Home> {
                 trailing: const Icon(Icons.star),
                 onTap: () {
                   openLink(
-                      "https://play.google.com/store/apps/details?id=com.kateile.stg");
+                      "https://play.google.com/store/apps/details?id=com.kateile.stg.tz");
                 },
               ),
               ListTile(
@@ -133,7 +131,7 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   Share.share(
                     'Hey, I am using a new STG App. Download it here\n'
-                    'https://play.google.com/store/apps/details?id=com.kateile.stg',
+                    'https://play.google.com/store/apps/details?id=com.kateile.stg.tz',
                   );
                 },
               ),
