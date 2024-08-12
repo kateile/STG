@@ -46,6 +46,6 @@ jobs:
           releaseFiles: build/app/outputs/bundle/release/*.aab
           track: ${{ github.ref_name }}
           inAppUpdatePriority: 2
-          changesNotSentForReview: false
+          changesNotSentForReview: true
           whatsNewDirectory: whatsnew
           mappingFile: build/app/outputs/mapping/release/mapping.txt
