@@ -143,12 +143,12 @@ class TopicListState extends State<TopicList> {
                 );
               },
               separatorBuilder: (context, index) {
-                if ((index != 0 && index % 5 == 0) ||
-                    (widget.tabState == TabState.search && index == 0)) {
-                  return const AdTile(
-                    id: listAdId,
-                  );
-                }
+                // if ((index != 0 && index % 5 == 0) ||
+                //     (widget.tabState == TabState.search && index == 0)) {
+                //   return const AdTile(
+                //     id: listAdId,
+                //   );
+                // }
                 return const SizedBox(
                   height: 0,
                   width: 0,

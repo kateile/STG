@@ -8,7 +8,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stg/utils/utils.dart';
 
-import 'ad.dart';
 
 class Render extends StatefulWidget {
   final Topic topic;
@@ -98,8 +97,8 @@ class _RenderState extends State<Render> {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const AdTile(id: renderAdId),
-              const Divider(),
+              //const AdTile(id: renderAdId),
+              //const Divider(),
               Builder(
                 builder: (BuildContext context) {
                   if (pathPDF.isNotEmpty) {
