@@ -2,9 +2,7 @@
 
 A wrapper of _"The United Republic Of Tanzania Standard Treatment Guidelines And National Essential Medicines List For Tanzania Mainland"_ book.
 
-## How it works?
-
-Easily navigate the 2021 Tanzania Standard Treatment Guidelines with this app. No more struggling to find specific topics; quick access and a user-friendly design make reading and referencing simple and efficient.
+Easily navigate the book with this app. No more struggling to find specific topics; quick access and a user-friendly design make reading and referencing simple and efficient.
 
 ## Screenshots
 
