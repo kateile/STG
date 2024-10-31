@@ -2,9 +2,13 @@
 
 ## Screenshots
 
-<img src="screenshots/1.png" width="200" alt="Screenshot 1">
-<img src="screenshots/2.png" width="200" alt="Screenshot 1">
-<img src="screenshots/3.png" width="200" alt="Screenshot 1">
+<p align="center">
+<img src="screenshots/1.png" width="30%" alt="Screenshot 1">
+&nbsp;
+<img src="screenshots/2.png" width="30%" alt="Screenshot 1">
+&nbsp;
+<img src="screenshots/3.png" width="30%" alt="Screenshot 1">
+</p>
 
 ## How to Install it
 
