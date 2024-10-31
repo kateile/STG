@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:in_app_update/in_app_update.dart';
+//import 'package:in_app_update/in_app_update.dart';
 
 import 'ui/home.dart';
 
@@ -13,21 +13,21 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  Future<void> checkForUpdate() async {
-    InAppUpdate.checkForUpdate().then((info) {
-      if (info.updateAvailability == UpdateAvailability.updateAvailable) {
-        InAppUpdate.performImmediateUpdate().then((_) {}).catchError((e) {
-          //print('performImmediateUpdate error: ${e.toString()}');
-        });
-      }
-    }).catchError((e) {
-      //print('checkForUpdate error: ${e.toString()}');
-    });
-  }
+  // Future<void> checkForUpdate() async {
+  //   InAppUpdate.checkForUpdate().then((info) {
+  //     if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+  //       InAppUpdate.performImmediateUpdate().then((_) {}).catchError((e) {
+  //         //print('performImmediateUpdate error: ${e.toString()}');
+  //       });
+  //     }
+  //   }).catchError((e) {
+  //     //print('checkForUpdate error: ${e.toString()}');
+  //   });
+  // }
 
   @override
   void initState() {
-    checkForUpdate().then((_) {});
+    //checkForUpdate().then((_) {});
     super.initState();
   }
 
