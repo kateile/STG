@@ -1,13 +1,19 @@
 # STG
 
+A wrapper of _"The United Republic Of Tanzania Standard Treatment Guidelines And National Essential Medicines List For Tanzania Mainland"_ book.
+
+## How it works?
+
+Easily navigate the 2021 Tanzania Standard Treatment Guidelines with this app. No more struggling to find specific topics; quick access and a user-friendly design make reading and referencing simple and efficient.
+
 ## Screenshots
 
 <p align="center">
-<img src="screenshots/1.png" width="30%" alt="Screenshot 1">
-&nbsp;
-<img src="screenshots/2.png" width="30%" alt="Screenshot 1">
-&nbsp;
-<img src="screenshots/3.png" width="30%" alt="Screenshot 1">
+    <img src="screenshots/1.png" width="30%" alt="Screenshot 1">
+    &nbsp;
+    <img src="screenshots/2.png" width="30%" alt="Screenshot 2">
+    &nbsp;
+    <img src="screenshots/3.png" width="30%" alt="Screenshot 3">
 </p>
 
 ## How to Install it
